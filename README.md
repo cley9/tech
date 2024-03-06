@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# instalación de npx gestor de paquete 
+```npm
+npm install --global npx
+```
+## Tipos de gestores de paquetes
+- npm
+- npx
+- pnpm
+- yarn
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Para crear un proyecto en React 17
+- Instala el gestor de paquete npx => npm install --global npx
+- Crear el proyecto react => npx create-react-app taxtech_front-end
+- Cambiar la version de react manual en el package.json a 17 
+#### cambios nota
+- https://es.stackoverflow.com/questions/527024/c%C3%B3mo-creo-un-proyecto-con-create-react-app-con-la-versi%C3%B3n-17-de-react-y-no-la-1
+- https://dev.to/lowla/create-react-app-with-a-previous-version-of-react-4g03
+#### react 17 
+- Crea la app de manera usual con npx create-react-app my_app.
+- Abre el package.json y cambia la versión de react, react-dom, and react-scripts a la versión anterior, o bien a la versión que deseas instalar:
+```
+"react": "17.0.2",
+"react-dom": "17.0.2",
+"react-scripts": "4.0.3"
+```
+- Borra el package-lock.json y los node_modules
+- Ejecuta en npm install en la carpeta del proyecto.
 
-## Available Scripts
+quitar en el index.js el metodo crate 
+#### React 17 index.js para ver el proyecto
+- el createRoot  es >=react 18
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import HolaMundo from './Data';
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+    <HolaMundo />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+reportWebVitals();
+```
+- Inicie react => npm start
+- #### ahora puedes crear un archivo jsx para mejorar el workflow
+```javascript
+// nota : al crear un proyecto tiene que ser todo en minuscula.
+// Para cambiar a la version de react 17 [ no recomendable]
+npm install react@17.0.2 react-dom@17.0.2 react-scripts@4.0.3
+// o manual en la ruta package.json
+    // before por default
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    //after, cambia las versiones a 17.0.2:
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+ - Para crear un proyecto en un version especifica de react => npx create-react-app@17.0.2 taxtech_frond-end
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
