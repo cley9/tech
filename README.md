@@ -61,3 +61,10 @@ npm install react@17.0.2 react-dom@17.0.2 react-scripts@4.0.3
  - Para crear un proyecto en un version especifica de react => npx create-react-app@17.0.2 taxtech_frond-end
 
 ```
+
+# Instalación de libreria de axios para el consumo de apiRest
+
+```js
+npm install axios
+```
+- modal librery [ npm install react-modal ]

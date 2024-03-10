@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HolaMundo from './Data';
+// admin
+import HomeAdmin from './components/admin/home';
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(
 ReactDOM.render(
   <React.StrictMode>
     <App />
     <HolaMundo />
+    <HomeAdmin />
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

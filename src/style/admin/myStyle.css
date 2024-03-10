@@ -1,0 +1,72 @@
+.cley{
+    color: salmon;
+}
+.rowRegister{
+    background: seagreen;
+    display: grid;
+    grid-template-columns: auto auto;
+    /* justify-content: center; */
+}
+.space{
+    margin-bottom: 60px;
+}
+.boxCamp{
+    background: salmon;
+    /* width: 10%; */
+}
+.inputBody{
+ padding: 10px;
+ margin-bottom: 20px;
+ margin-right: 30px;
+ width: 80%;
+}
+/* .inputDate{
+    width: 80%;
+
+} */
+.subName{
+    margin-bottom: 6px;
+background: palegreen;
+/* margin-top: 10px; */
+}
+
+.btnBoxSave{
+    background:#7EEBCA;
+    /* padding: 7px 20px; */
+    padding: 14px 50px;
+    /* margin-top: 30px; */
+    /* margin-left: 70%; */
+    float: left;
+    /* font-size: 14px; */
+    box-shadow: 0px 10px 20px -10px #7DCEA0;
+    border-radius: 5px;
+    text-transform: uppercase;
+     /*background:#7ED6EB; */
+     /* color: #ffffff; */
+    }
+    .btnBoxSave:hover{
+    
+      background: #7ADDBF;
+    }
+
+    .btnEfectClick:active{
+        transform: scale(0.9);
+        cursor: pointer;
+        /* background-color: #333F50; */
+        box-shadow: 0 0 2px #6ABEA5;
+        transition:  0.6s ease; 
+        }
+        .btnEfectClick:focus-visible{
+        box-shadow: 0 0 2px #6ABEA5;
+        }
+        
+        .btnBody{
+            background:orange;
+            width: 60%;
+            display: flex;
+            justify-content: space-between;
+            /* position: ; */
+            margin-left: 40%;
+        }
+
+
