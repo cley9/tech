@@ -1,6 +1,9 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Modal from 'react-modal';
+import Swal from 'sweetalert2';
+
 import axiosInstance from '../../../methods/admin/instanAxios';
+import {validation} from '../../../methods/admin/methods';
 import '../../../style/admin/myStyle.css';
 Modal.setAppElement('#root'); // Para evitar errores de accesibilidad, defina el elemento raíz de su aplicación
 
@@ -13,7 +16,6 @@ function MiModal({ isOpen, onClose }) {
         fecha_de_nacimiento: '',
         dni: ''
     });
-
     const customStyles = {
         overlay: {
             backgroundColor: 'rgba(0, 0, 0, 0.3)' // Fondo oscurecido del modal
@@ -48,8 +50,49 @@ function MiModal({ isOpen, onClose }) {
         try {
             const response = await axiosInstance.post('/create-client', formClient);
             console.log('Respuesta de la solicitud POST:', response.data);
+            
+            if(response.data.status==200 || response.data.status== 201){
+                 const mgsIcon =  response.data.status == 200 ? "warning" :"success";
+                validation();
+                if (response.data.status==201) {
+                    // setTimeout(()=>{
+                    setFormClient({
+                        name: '',
+                        apellido: '',
+                        edad: '',
+                        fecha_de_nacimiento: '',
+                        dni: ''
+                    });
+                        onClose();
+                    // },5500);
+                }
+                Swal.fire({
+                    title: 'El cliente',
+                    text: `${response.data.message}`,
+                    icon: `${mgsIcon}`,
+                    showConfirmButton: false,
+                    timer:4000
+                });
+                // response.data.status == 200? onClose(): false;
+            }
           } catch (error) {
-            console.error('Error al realizar la solicitud POST:', error);
+            if (error.response && error.response.data && error.response.data.message) {
+                Swal.fire({
+                    title: 'Advertencia',
+                    text: error.response.data.message,
+                    icon: 'info',
+                    showConfirmButton: false,
+                    timer: 4000
+
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Ha ocurrido un error al procesar la solicitud',
+                    icon: 'error',
+                    showConfirmButton: true
+                });
+            }
           }
          
         // onClose(); // esto es para cerrar el modal una ves terminado 
