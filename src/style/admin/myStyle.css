@@ -1,8 +1,5 @@
-.cley{
-    color: salmon;
-}
 .rowRegister{
-    background: seagreen;
+    /* background: seagreen; */
     display: grid;
     grid-template-columns: auto auto;
     /* justify-content: center; */
@@ -11,31 +8,32 @@
     margin-bottom: 60px;
 }
 .boxCamp{
-    background: salmon;
+    /* background: salmon; */
     /* width: 10%; */
 }
 .inputBody{
- padding: 10px;
+ padding: 10px 30px;
  margin-bottom: 20px;
  margin-right: 30px;
- width: 80%;
+ /* width: 80%; */
+ max-width: 80%;
+ min-width: 80%;
 }
-/* .inputDate{
-    width: 80%;
-
-} */
-.subName{
-    margin-bottom: 6px;
-background: palegreen;
-/* margin-top: 10px; */
+.btnRegis{
+    background:#7EEBCA;
+    position: absolute;
+    left: 44.5%;
+    top: 13%;
+    padding: 14px 40px !important;
+    float: left;
+    font-size: 14px;
+    box-shadow: 0px 10px 20px -10px #7DCEA0;
+    border-radius: 5px;
+    text-transform: uppercase;
 }
-
 .btnBoxSave{
     background:#7EEBCA;
-    /* padding: 7px 20px; */
-    padding: 14px 50px;
-    /* margin-top: 30px; */
-    /* margin-left: 70%; */
+    padding: 14px 40px !important;
     float: left;
     /* font-size: 14px; */
     box-shadow: 0px 10px 20px -10px #7DCEA0;
@@ -61,12 +59,49 @@ background: palegreen;
         }
         
         .btnBody{
-            background:orange;
-            width: 60%;
+            /* background:salmon; */
             display: flex;
-            justify-content: space-between;
-            /* position: ; */
-            margin-left: 40%;
+            justify-content:space-evenly;
+            /* grid-template-columns: auto auto; */
+            /* padding: 0; */
         }
 
 
+/* home admin */
+.containerHome{
+    background: #2196F3;
+    display: flex;
+    justify-content: center;
+    /* width: 100%; */
+    padding: 30px;
+}
+
+/* .rowRegisterUser{
+    min-width: 35% !important;
+    background: orange !important;
+}
+.formCreateAdmin{
+    border-radius: 8px;
+    padding: 20px 30px;
+    background: darkblue !important;
+} */
+
+/* listCliente style */
+.titleClient{
+    /* background: salmon !important; */
+    margin-top: 60px;
+    margin-bottom:30px;
+    /* margin-right: 20%; */
+    /* text-align: center; */
+}
+.BodyMain{
+    margin-top: 42px;
+}
+/* style updateform*/
+.titleEdit{
+    color: salmon;
+    margin-bottom: 24px;
+}
+.subTitleEdit{
+    margin-bottom: 37px;
+}

@@ -1,3 +1,20 @@
+# Deploy  of React 17 in local
+# Requisitos 
+- Tener instalado Nodejs
+- Tener instalado npm de manera global
+
+# Para ejecutar el Frond-end 
+- Descarga el repositorio tech [ https://github.com/cley9/React-17.git ]
+- Instala los paquetes ejecutando npm install
+- Inicia el entorno del react 17  [ npm start]
+
+# Pasos para el uso del micro sistema
+- Registrate como administrador 
+>  http://localhost:3000/
+- Ya puedes registra, editar eliminar y listar todo los clientes de tech
+
+
+# This is for Creation in new proyect in react 17  
 # instalación de npx gestor de paquete 
 ```npm
 npm install --global npx

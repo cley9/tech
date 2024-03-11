@@ -49,10 +49,9 @@ function UpdateFromClient({ isOpen, onClose, clientData, updateData }) {
             [name]: value
         });
     };
-
     const handleUpdateClient = async (event) => {
         event.preventDefault();
-        console.log("sabe data", formClient.dni);
+        // console.log("sabe data", formClient.dni);
         const updateObjClient = {
             "name": formClient.name,
             "apellido": formClient.apellido,
@@ -60,10 +59,7 @@ function UpdateFromClient({ isOpen, onClose, clientData, updateData }) {
             "fecha_de_nacimiento": formClient.fecha_de_nacimiento
         };
         try {
-
             const response = await axiosInstance.put(`/update-client/${formClient.dni}`, formClient);
-            console.log('Respuesta de la solicitud POST:', response.data);
-            console.log(" -- clien", formClient.dni, ' this is data obj ', updateObjClient, 'final ===> ', response);
             if (response.data.status == 200 || response.data.status == 201) {
                 //  const mgsIcon =  response.data.status == 200 ? "warning" :"success";
                 validation();
@@ -88,8 +84,6 @@ function UpdateFromClient({ isOpen, onClose, clientData, updateData }) {
                 });
                 updateData();
                 onClose();
-                
-                // response.data.status == 200? onClose(): false;
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
@@ -118,37 +112,33 @@ function UpdateFromClient({ isOpen, onClose, clientData, updateData }) {
             contentLabel="Ejemplo de Modal"
             style={customStyles}
         >
-            <h2 className='bg-red-500 cley'>Editar datos de Cliente</h2>
-            <h3>Dni: {formClient.dni} </h3>
+            <h2 className='bg-red-500 titleEdit'>Editar datos de Cliente</h2>
+            <h3 className='subTitleEdit'>Dni: {formClient.dni} </h3>
             <form onSubmit={handleUpdateClient}>
                 <div className="rowRegister space">
                     <div className='boxCamp'>
-                        <h4 className='subName'>Nombre del cliente</h4>
+                        <h5 className='subName'>Nombre del cliente</h5>
                         <input type="text" className='inputBody ' name='name' value={formClient.name} onChange={handleChange} placeholder='Nombre del cliente' required />
                     </div>
                     <div className='boxCamp'>
-                        <h4 className='subName'>Apellido del cliente</h4>
+                        <h5 className='subName'>Apellido del cliente</h5>
                         <input type="text" className='inputBody' name="apellido" value={formClient.apellido} onChange={handleChange} placeholder='Apellido del cliente' required />
                     </div>
                     <div className='boxCamp'>
-                        <h4 className='subName'>Edad del cliente</h4>
-                        <input type="text" className='inputBody' name='edad' value={formClient.edad} onChange={handleChange} placeholder='Edad del cliente' required />
+                        <h5 className='subName'>Edad del cliente</h5>
+                        <input type="number" className='inputBody' name='edad' value={formClient.edad} onChange={handleChange} min="0"
+                            onInput={(e) => { e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 2) }} placeholder='Edad del cliente' required />
                     </div>
                     <div className='boxCamp'>
-                        <h4 className='subName'>Fecha de nacimiento del cliente</h4>
+                        <h5 className='subName'>Fecha de nacimiento del cliente</h5>
                         <input type="date" className='inputBody inputDate' name='fecha_de_nacimiento' value={formClient.fecha_de_nacimiento} onChange={handleChange} placeholder='Fecha nacimiento del cliente' required />
                     </div>
-                    {/* <div className='boxCamp'>
-                    <h4 className='subName'>Dni del cliente</h4>
-                    <input type="text" className='inputBody' name='dni' value={formClient.dni} onChange={handleChange} placeholder='Dni del cliente' required />
-                </div> */}
                 </div>
-                <div className='btnBody rowRegister'>
-                    <button onClick={onClose} className='btnPosition btnBoxSave  btnEfectClick'>Salir</button>
-                    <button type='submit' className='btnPosition btnBoxSave  btnEfectClick'>Guardar</button>
+                <div className='btnBody'>
+                    <button onClick={onClose} className=' btnBoxSave  btnEfectClick'>Salir</button>
+                    <button type='submit' className=' btnBoxSave  btnEfectClick'>Guardar</button>
                 </div>
             </form>
-
         </Modal>
     );
 }

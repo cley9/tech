@@ -1,14 +1,11 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import Swal from 'sweetalert2';
-
 import axiosInstance from '../../../methods/admin/instanAxios';
-import {validation} from '../../../methods/admin/methods';
+import { validation } from '../../../methods/admin/methods';
 import '../../../style/admin/myStyle.css';
 Modal.setAppElement('#root'); // Para evitar errores de accesibilidad, defina el elemento raíz de su aplicación
-
-function MiModal({ isOpen, onClose }) {
-    
+function SaveFromClient({ isOpen, onClose, saveDataA, updateClientList }) {
     const [formClient, setFormClient] = useState({
         name: '',
         apellido: '',
@@ -30,10 +27,6 @@ function MiModal({ isOpen, onClose }) {
             border: 'none' // Sin borde
         }
     };
-    // const formClient={};
-    //     const post=()=>{
-    //         console.log("listo o");
-    //     };
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormClient({
@@ -41,21 +34,14 @@ function MiModal({ isOpen, onClose }) {
             [name]: value
         });
     };
-
-
-        const handleSave=async (event)=>{
+    const handleSave = async (event) => {
         event.preventDefault();
-        console.log("sabe data",formClient);
-        
         try {
             const response = await axiosInstance.post('/create-client', formClient);
-            console.log('Respuesta de la solicitud POST:', response.data);
-            
-            if(response.data.status==200 || response.data.status== 201){
-                 const mgsIcon =  response.data.status == 200 ? "warning" :"success";
-                validation();
-                if (response.data.status==201) {
-                    // setTimeout(()=>{
+            if (response.data.status == 200 || response.data.status == 201) {
+                const mgsIcon = response.data.status == 200 ? "warning" : "success";
+                if (response.data.status == 201) {
+                    // updateClientList();
                     setFormClient({
                         name: '',
                         apellido: '',
@@ -63,19 +49,23 @@ function MiModal({ isOpen, onClose }) {
                         fecha_de_nacimiento: '',
                         dni: ''
                     });
-                        onClose();
-                    // },5500);
+                    onClose();
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                    // saveDataA();
+                    // saveDataA();
                 }
                 Swal.fire({
                     title: 'El cliente',
                     text: `${response.data.message}`,
                     icon: `${mgsIcon}`,
                     showConfirmButton: false,
-                    timer:4000
+                    timer: 4000
                 });
-                // response.data.status == 200? onClose(): false;
+                // saveDataA();
             }
-          } catch (error) {
+        } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
                 Swal.fire({
                     title: 'Advertencia',
@@ -93,10 +83,9 @@ function MiModal({ isOpen, onClose }) {
                     showConfirmButton: true
                 });
             }
-          }
-         
-        // onClose(); // esto es para cerrar el modal una ves terminado 
+        }
     };
+
     return (
         <Modal
             isOpen={isOpen}
@@ -108,36 +97,38 @@ function MiModal({ isOpen, onClose }) {
             <h3>Datos: </h3>
             <form onSubmit={handleSave}>
 
-            <div className="rowRegister space">
-                <div className='boxCamp'>
-                    <h4 className='subName'>Nombre del cliente</h4>
-                    <input type="text" className='inputBody ' name='name' value={formClient.name} onChange={handleChange} placeholder='Nombre del cliente' required />
+                <div className="rowRegister space">
+                    <div className='boxCamp'>
+                        <h5 className='subName'>Nombre del cliente</h5>
+                        <input type="text" className='inputBody ' name='name' value={formClient.name} onChange={handleChange} placeholder='Nombre del cliente' required />
+                    </div>
+                    <div className='boxCamp'>
+                        <h5 className='subName'>Apellido del cliente</h5>
+                        <input type="text" className='inputBody' name="apellido" value={formClient.apellido} onChange={handleChange} placeholder='Apellido del cliente' required />
+                    </div>
+                    <div className='boxCamp'>
+                        <h5 className='subName'>Edad del cliente</h5>
+                        <input type="number" className='inputBody' name='edad' value={formClient.edad} onChange={handleChange}  min="0"
+                            onInput={(e) => { e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 2) }} placeholder='Edad del cliente' required />
+                    </div>
+                    <div className='boxCamp'>
+                        <h5 className='subName'>Fecha de nacimiento del cliente</h5>
+                        <input type="date" className='inputBody inputDate' name='fecha_de_nacimiento' value={formClient.fecha_de_nacimiento} onChange={handleChange} placeholder='Fecha nacimiento del cliente' required />
+                    </div>
+                    <div className='boxCamp'>
+                        <h5 className='subName'>Dni del cliente</h5>
+                        <input type="number" className='inputBody' name='dni' value={formClient.dni} onChange={handleChange} min="0"
+                            onInput={(e) => { e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 8) }} placeholder='Dni del cliente' required />
+                    </div>
                 </div>
-                <div className='boxCamp'>
-                    <h4 className='subName'>Apellido del cliente</h4>
-                    <input type="text" className='inputBody' name="apellido" value={formClient.apellido} onChange={handleChange} placeholder='Apellido del cliente' required />
+                <div className='btnBody'>
+                    <button onClick={onClose} className=' btnBoxSave  btnEfectClick'>Salir</button>
+                    <button type='submit' className=' btnBoxSave  btnEfectClick'>Guardar</button>
                 </div>
-                <div className='boxCamp'>
-                    <h4 className='subName'>Edad del cliente</h4>
-                    <input type="text" className='inputBody'name='edad' value={formClient.edad} onChange={handleChange} placeholder='Edad del cliente' required />
-                </div>
-                <div className='boxCamp'>
-                    <h4 className='subName'>Fecha de nacimiento del cliente</h4>
-                    <input type="date" className='inputBody inputDate' name='fecha_de_nacimiento' value={formClient.fecha_de_nacimiento} onChange={handleChange} placeholder='Fecha nacimiento del cliente' required />
-                </div>
-                <div className='boxCamp'>
-                    <h4 className='subName'>Dni del cliente</h4>
-                    <input type="text" className='inputBody' name='dni' value={formClient.dni} onChange={handleChange} placeholder='Dni del cliente' required />
-                </div>
-            </div>
-            <div className='btnBody rowRegister'>
-                <button onClick={onClose} className='btnPosition btnBoxSave  btnEfectClick'>Salir</button>
-                <button type='submit' className='btnPosition btnBoxSave  btnEfectClick'>Guardar</button>
-            </div>
             </form>
 
         </Modal>
     );
 }
 
-export default MiModal;
+export default SaveFromClient;
