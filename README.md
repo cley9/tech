@@ -14,6 +14,10 @@
 - Ya puedes registra, editar eliminar y listar todo los clientes de tech
 
 
+
+
+# Omitir lo de a bajo, es para crear proyecto
+
 # This is for Creation in new proyect in react 17  
 # instalación de npx gestor de paquete 
 ```npm
