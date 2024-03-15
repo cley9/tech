@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8080/api/v1/admin',
+  // baseURL: 'http://localhost:8080/api/v1/admin',
+  baseURL: 'https://agrupec.com/Tech/index.php/api/v1/admin',
 //   baseURL: 'http://localhost:8080/api/v1/admin/home',
   // Otros parámetros de configuración si los hay
 });

@@ -2,39 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import axiosInstance from '../../methods/admin/instanAxios.js';
 import UpdateFromClient from './modal/updateFormClient.jsx';
-import SaveFromClient from './modal/formularioRegistro.jsx';
 import '../../style/admin/myStyle.css';
 
-function ListClient() {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [listClient, setListClient] = useState([]);
+function ListClient({listClient, updateListClient}) {
     const [clientData, setClientData] = useState(null);
-    useEffect(() => {
-        fetchData();
-    }, []);
-    const fetchData = async () => {
-        try {
-            const response = await axiosInstance.get('/list-client', {
-                method: 'get'
-            });
-            // console.log("-- user this is ", response.data);
-            const listClient = response.data.list_client;
-            if (response.data.status == 200) {
-                // console.log("ok", response.data.list_client);
-                setListClient(listClient); // Se establece el listClient
-            } else {
-                throw new Error('Error al cargar los datosdfaf');
-            }
-            setData(response.data);
-            setLoading(false);
-        } catch (error) {
-            setError(error);
-            setLoading(false);
-        }
-    };
-
     const clientDelete = async (dniClient) => {
         try {
             const swalWithBootstrapButtons = Swal.mixin({
@@ -65,7 +36,7 @@ function ListClient() {
                             showConfirmButton: false,
                             timer: 4000
                         });
-                        fetchData();
+                        updateListClient();
                     } else {
                         throw new Error('Error al cargar');
                     }
@@ -95,28 +66,13 @@ function ListClient() {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const openModal = (clientData) => {
-        // console.log("--------s",clientData);
+        // console.log("data enviado",clientData);
         setModalIsOpen(true);
         setClientData(clientData);
     };
     const closeModal = () => {
         setModalIsOpen(false);
     };
-
-    const updateData = () => {
-        fetchData();
-    };
-    
-    const saveDataA = () => {
-        fetchData(); // Vuelve a buscar la lista actualizada
-    };
-    // const saveDataA = async () => {
-    //     try {
-    //         await fetchData();
-    //     } catch (error) {
-    //         console.error('Error al actualizar los datos:', error);
-    //     }
-    // };
 
     return (
         <div>
@@ -154,14 +110,13 @@ function ListClient() {
                                 <td>
                                     <a onClick={() => clientDelete(item.dni)}
                                         className="btn btn-danger " id="delete-frm"> <i className="bi bi-trash"></i></a>
-
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
-            <UpdateFromClient isOpen={modalIsOpen} onClose={closeModal} clientData={clientData} updateData={updateData}/>
+            <UpdateFromClient isOpen={modalIsOpen} onClose={closeModal} clientData={clientData} updateListClient={updateListClient}/>
         </div>
     )
 }

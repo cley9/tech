@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import Swal from 'sweetalert2';
-
 import axiosInstance from '../../../methods/admin/instanAxios';
-import { validation } from '../../../methods/admin/methods';
-// import
 import '../../../style/admin/myStyle.css';
 Modal.setAppElement('#root'); // Para evitar errores de accesibilidad, defina el elemento raíz de su aplicación
 
-function UpdateFromClient({ isOpen, onClose, clientData, updateData }) {
+function UpdateFromClient({ isOpen, onClose, clientData, updateListClient }) {
     const [formClient, setFormClient] = useState({
         name: '',
         apellido: '',
@@ -27,7 +24,6 @@ function UpdateFromClient({ isOpen, onClose, clientData, updateData }) {
             });
         }
     }, [clientData]);
-
     const customStyles = {
         overlay: {
             backgroundColor: 'rgba(0, 0, 0, 0.3)' // Fondo oscurecido del modal
@@ -51,30 +47,10 @@ function UpdateFromClient({ isOpen, onClose, clientData, updateData }) {
     };
     const handleUpdateClient = async (event) => {
         event.preventDefault();
-        // console.log("sabe data", formClient.dni);
-        const updateObjClient = {
-            "name": formClient.name,
-            "apellido": formClient.apellido,
-            "edad": formClient.edad,
-            "fecha_de_nacimiento": formClient.fecha_de_nacimiento
-        };
         try {
             const response = await axiosInstance.put(`/update-client/${formClient.dni}`, formClient);
             if (response.data.status == 200 || response.data.status == 201) {
-                //  const mgsIcon =  response.data.status == 200 ? "warning" :"success";
-                validation();
-                // if (response.data.status == 201) {
-                //     // setTimeout(()=>{
-                //     setFormClient({
-                //         name: '',
-                //         apellido: '',
-                //         edad: '',
-                //         fecha_de_nacimiento: '',
-                //         dni: ''
-                //     });
-                //     onClose();
-                //     // },5500);
-                // }
+                updateListClient();
                 Swal.fire({
                     title: 'El cliente',
                     text: `${response.data.message}`,
@@ -82,7 +58,6 @@ function UpdateFromClient({ isOpen, onClose, clientData, updateData }) {
                     showConfirmButton: false,
                     timer: 4000
                 });
-                updateData();
                 onClose();
             }
         } catch (error) {

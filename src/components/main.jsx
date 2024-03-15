@@ -3,8 +3,6 @@ import Swal from 'sweetalert2';
 import React,{useState, useEffect} from 'react';
 // import { useHistory } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
-
 import axiosInstance from '../methods/admin/instanAxios';
 function Main() {
     const navigate = useNavigate();
@@ -20,11 +18,11 @@ function Main() {
             [name]: value
         });
     };
-
     const handleRegistration =async (event) => {
         event.preventDefault();
         try {
-            const response = await axiosInstance.post('http://localhost:8080/registro-admin', formClient);
+            // const response = await axiosInstance.post('http://localhost:8080/registro-admin', formClient);
+            const response = await axiosInstance.post('https://agrupec.com/Tech/index.php/registro-admin', formClient);
             if(response.data.status==200 || response.data.status== 201){
                  localStorage.setItem('token',response.data.token);
                  localStorage.setItem ('user',response.data.user.name)

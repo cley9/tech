@@ -19,21 +19,16 @@ import Main from './components/main';
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(
 ReactDOM.render(
-
 <BrowserRouter>
 <React.StrictMode>
   <Routes>
-
     <Route path="/" element={<Main aria />} />
-    {/* <Route path="/home" element={<HomeAdmin aria />} /> */}
-    {/* <Route path="/admin" element={<ListClient aria />} /> */}
     <Route path="/admin" element={<HomeAdmin aria />} />
-    <Route path="/user" element={<AdminComponent aria />} /> // Asigna la ruta '/' a AdminComponent con aria
+    <Route path="/user" element={<AdminComponent aria />} /> {/* // Asigna la ruta '/' a AdminComponent con aria */}
     {/* <Route path="*" element={<NotFoundComponent />} /> */}
   </Routes>
 </React.StrictMode>
 </BrowserRouter>,
-
   document.getElementById('root')
 );
 

@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import axiosInstance from '../../../methods/admin/instanAxios';
-import { validation } from '../../../methods/admin/methods';
 import '../../../style/admin/myStyle.css';
 Modal.setAppElement('#root'); // Para evitar errores de accesibilidad, defina el elemento raíz de su aplicación
-function SaveFromClient({ isOpen, onClose, saveDataA, updateClientList }) {
+function SaveClientForm({ isOpen, onClose, saveDataA, updateClientList, registroClient, setRegistroClient , updateListClient}) {
     const [formClient, setFormClient] = useState({
         name: '',
         apellido: '',
@@ -41,7 +40,7 @@ function SaveFromClient({ isOpen, onClose, saveDataA, updateClientList }) {
             if (response.data.status == 200 || response.data.status == 201) {
                 const mgsIcon = response.data.status == 200 ? "warning" : "success";
                 if (response.data.status == 201) {
-                    // updateClientList();
+                    updateListClient();
                     setFormClient({
                         name: '',
                         apellido: '',
@@ -51,10 +50,8 @@ function SaveFromClient({ isOpen, onClose, saveDataA, updateClientList }) {
                     });
                     onClose();
                     setTimeout(() => {
-                        window.location.reload();
+                        // window.location.reload();
                     }, 2000);
-                    // saveDataA();
-                    // saveDataA();
                 }
                 Swal.fire({
                     title: 'El cliente',
@@ -63,7 +60,6 @@ function SaveFromClient({ isOpen, onClose, saveDataA, updateClientList }) {
                     showConfirmButton: false,
                     timer: 4000
                 });
-                // saveDataA();
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
@@ -73,7 +69,6 @@ function SaveFromClient({ isOpen, onClose, saveDataA, updateClientList }) {
                     icon: 'info',
                     showConfirmButton: false,
                     timer: 4000
-
                 });
             } else {
                 Swal.fire({
@@ -131,4 +126,4 @@ function SaveFromClient({ isOpen, onClose, saveDataA, updateClientList }) {
     );
 }
 
-export default SaveFromClient;
+export default SaveClientForm;
